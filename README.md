@@ -29,3 +29,6 @@ Change sensor by change the following lines in the robot.xacro into another xacr
 - mid40.csv
 - mid70.csv
 - tele.csv
+## TODO
+- Revise this readme
+- Reconstruct this project
