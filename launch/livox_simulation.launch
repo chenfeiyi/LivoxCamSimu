@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="world" default="$(find livox_laser_simulation)/worlds/textured_plane.world" />
+  <arg name="robot" default="$(find livox_laser_simulation)/urdf/robot.xacro" />
+
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+	<arg name="world_name" value="$(arg world)"/> <arg name="paused" 
+	value="false"/> <arg name="use_sim_time" value="true"/> <arg 
+	name="gui" value="true"/> <arg name="headless" value="false"/> <arg 
+	name="debug" value="false"/> <arg name="verbose" value="true"/>
+  </include>
+  
+  <param name="sensor_description" command="$(find xacro)/xacro --inorder $(arg robot)" />
+  <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-urdf -model robot -param sensor_description" />
+</launch>

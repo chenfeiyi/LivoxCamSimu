@@ -1,0 +1,7 @@
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:property name="M_PI" value="3.1415926535897931"/> 
+  <xacro:include filename="$(find livox_laser_simulation)/urdf/livox_mid70.xacro"/>
+  <xacro:include filename="$(find livox_laser_simulation)/urdf/camera.xacro"/>
+  <xacro:Livox_Mid70 name="livox" visualize="true" publish_pointcloud_type="1"/>
+  <xacro:usb_cam parent="livox_base" xyz="0.1 0.3 0.2" rpy="0 ${M_PI/40} ${M_PI/20}"/>
+</robot>
