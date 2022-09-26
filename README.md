@@ -28,7 +28,7 @@ You can change the extrinsic parameters between camera and Livox in file "robot.
   <xacro:usb_cam parent="livox_base" xyz="0.1 0.3 0.2" rpy="0 ${M_PI/40} ${M_PI/20}"/>
 
 ```
-And we supply a Matlab script (src/GtCalc.m) to calculate the convert this xyz and rpy into extrinsic matrix. You need to change
+And we supply a Matlab script (src/GtCalc.m) to convert this xyz and rpy into extrinsic matrix. You need to change
 this two line:
 ```matlab
 xyz=[0.1 0.3 0.2]; % parameters in Gazebo
