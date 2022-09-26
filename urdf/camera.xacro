@@ -1,7 +1,13 @@
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
 
   <xacro:property name="M_PI" value="3.1415926535897931"/> 
+  <xacro:property name="guassian_mean" value="0"/>
+  <xacro:property name="guassian_std" value="0.007"/>
   <xacro:property name="horizontal_fov" value="90"/>
+  <xacro:property name="img_width" value="1280"/>
+  <xacro:property name="img_height" value="720"/>
+  <xacro:property name="img_update_rate" value="30"/>
+  <xacro:property name="cam_topic" value="/usb_cam/image_raw"/>
   <xacro:macro name="usb_cam" params="xyz rpy parent">
     <joint name="camera_sensor_joint" type="fixed">
             <axis xyz="0 0 1" />
@@ -32,12 +38,14 @@
     </link>
     <gazebo reference="camera_link">
         <sensor type="camera" name="camera">
-            <update_rate>30.0</update_rate>
+            <update_rate>${img_update_rate}</update_rate>
             <camera name="head">
                 <horizontal_fov>${horizontal_fov * M_PI/180.0}</horizontal_fov>
                 <image>
-                    <width>1280</width>
-                    <height>720</height>
+                    <!-- <width>1280</width>
+                    <height>720</height> -->
+                    <width>${img_width}</width>
+                    <height>${img_height}</height>
                     <format>R8G8B8</format>
                 </image>
                 <clip>
@@ -46,15 +54,17 @@
                 </clip>
                 <noise>
                     <type>gaussian</type>
-                    <mean>0.0</mean>
-                    <stddev>0.007</stddev>
+                    <!-- <mean>0.0</mean> -->
+                    <!-- <stddev>0.007</stddev> -->
+                    <stddev>${guassian_mean}</stddev>
+                    <stddev>${guassian_std}</stddev>
                 </noise>
             </camera>
             <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
                 <alwaysOn>true</alwaysOn>
                 <updateRate>0.0</updateRate>
                 <cameraName>usb_cam</cameraName>
-                <imageTopicName>image_raw</imageTopicName>
+                <imageTopicName>${cam_topic}</imageTopicName>
                 <cameraInfoTopicName>camera_info</cameraInfoTopicName>
                 <frameName>camera_link</frameName>
                 <hackBaseline>0.07</hackBaseline>

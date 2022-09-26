@@ -11,5 +11,7 @@
   </include>
   
   <param name="sensor_description" command="$(find xacro)/xacro --inorder $(arg robot)" />
-  <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-urdf -model robot -param sensor_description" />
+  <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-urdf -model robot 
+              -x 0 -y 0 -z 1 -param sensor_description" />
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find livox_laser_simulation)/rviz/livox_simulation.rviz"/>
 </launch>
